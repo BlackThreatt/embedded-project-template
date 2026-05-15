@@ -53,8 +53,6 @@ git commit -m "Initial commit from template"
 
 ```bash
 make        # Build the project
-make bin    # Generate project firmware in binary
-make hex    # Generate project firmware in hexadecimal 
 make clean  # Remove build artifacts
 ``` 
 The compiled output is placed in the `build/` directory.
@@ -97,6 +95,8 @@ The included `Makefile` provides a ready-to-use build system. Key targets:
 |---------------|--------------------------------------|
 | `make`        | Build the full project                 |
 | `make clean`  | Remove all build artifacts             |
+| `make bin`    | Generate project firmware in binary    |
+| `make hex`    | Generate project firmware in hex       |
 | `make flash`  | (TODO) Flash to target MCU             |
 | `make test`   | (TODO) Run unit tests                  |
 
