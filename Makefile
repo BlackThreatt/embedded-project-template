@@ -1,6 +1,7 @@
 # Toolchain
 CC = arm-none-eabi-gcc
 OBJCOPY = arm-none-eabi-objcopy
+SIZE = arm-none-eabi-size
 
 # Target
 TARGET = firmware
@@ -78,18 +79,19 @@ all : $(BUILD_DIR)/$(TARGET).elf
 $(BUILD_DIR)/$(TARGET).elf : $(OBJECTS)
 	@mkdir -p $(dir $@)
 	$(CC) $(OBJECTS) $(LDFLAGS) $(LDLIBS) -o $@
-
-$(BUILD_DIR)/%.o: %.c
+	$(SIZE) $(BUILD_DIR)/$(TARGET).elf
+	
+$(BUILD_DIR)/%.o : %.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-bin: $(BUILD_DIR)/$(TARGET).elf
+bin : $(BUILD_DIR)/$(TARGET).elf
 	$(OBJCOPY) -O binary $< $(BUILD_DIR)/$(TARGET).bin
 
-hex: $(BUILD_DIR)/$(TARGET).elf
+hex : $(BUILD_DIR)/$(TARGET).elf
 	$(OBJCOPY) -O ihex $< $(BUILD_DIR)/$(TARGET).hex
 
-clean:
+clean :
 	rm -rf $(BUILD_DIR)
 
 # TODO flash
